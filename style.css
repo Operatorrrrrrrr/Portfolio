@@ -410,9 +410,20 @@ body {
 .carte-projet:has(.image-projet) > p { min-height: calc(4.5em + 2rem); }
   
 .lien-tous-projets {
-    display: inline-block; margin-top: 0.5rem; padding: 0.75rem 1.5rem;
-    border-radius: 999px; background: var(--nav-fond); color: var(--texte-mute);
-    text-decoration: none; font-weight: 600; backdrop-filter: blur(4px);
+    /* Changements pour l'alignement à droite */
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    
+    /* Tes styles d'origine conservés */
+    margin-top: 0.5rem; 
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px; 
+    background: var(--nav-fond); 
+    color: var(--texte-mute);
+    text-decoration: none; 
+    font-weight: 600; 
+    backdrop-filter: blur(4px);
     transition: background 0.3s, transform 0.3s;
 }
   
