@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="style.css?v=5">
+
+</head>
+<body>
+  <div class="arriere-plan" aria-hidden="true">
+    <div class="calque-fond calque-a"></div>
+    <div class="calque-fond calque-b"></div>
+  </div>
+  <div class="overlay" aria-hidden="true"></div>
+  <header class="titre-filigrane">Mon Portfolio</header>
+  <nav class="nav-droite" aria-label="Navigation">
+    <a href="#accueil" class="lien-nav" data-icon="🏠" data-label="Accueil">Accueil</a>
+    <a href="#apropos" class="lien-nav" data-icon="👤" data-label="À propos">À propos</a>
+    <a href="#projets" class="lien-nav" data-icon="💼" data-label="Projets">Projets</a>
+    <a href="#contact" class="lien-nav" data-icon="📧" data-label="Contact">Contact</a>
+  </nav>
+  <main class="contenu">
+    <section id="accueil" class="section-pleine">
+      <div class="contenu-section1 reveal">
+        <h1>Bienvenue</h1>
+        <p id="typewriter-text">Entre lignes de code et lignes de vie, découvrez qui je suis.</p>
+      </div>
+    </section>
+    <div class="groupe-apropos-projets">
+      <section id="apropos" class="section-pleine">
+        <div class="contenu-section3 reveal">
+          <h2 class="h2-apropos">À propos</h2>
+      
+          <div class="conteneur-flex-apropos">
+        <p class="presentation-acceuil">Je m'appelle Victor Daucourt.<br>Étudiant en première année de bachelor Cybersécurité et I.A</p>
+        <p class="presentation-acceuil">Passionné d'informatique depuis mon jeune âge,<br>aujourd'hui par le monde de le programmation.</p>
+         </div>
+        </div>
+        <button type="button" class="btn-apropos" data-toggle="detail-apropos">En savoir plus</button>
+        <a href="CV.pdf" download class="btn-telecharger">Mon CV</a>
+      </section>
+      <section id="detail-apropos" class="section-pleine detail-section" style="display: none;">
+        <div class="contenu-section3 reveal">
+          <h2>Un espace digital pour affirmer une présence bien réelle.</h2><br><br>
+          <p class="nanum-pen-script-regular">Né dans l’ère numérique, je développe mes compétences en informatique avec passion. Mon objectif : <span class="souligne">me spécialiser en cybersécurité</span> et contribuer à un monde digital plus sûr.</p><br>
+          <p>Tout a commencé avec les jeux vidéo sur mon ordinateur, un simple loisir qui a éveillé ma curiosité pour le code. Au fil des années, cette curiosité est devenue un intérêt pour le développement, puis pour la sécurité informatique, un domaine qui me motive à apprendre constamment et à me préparer aux défis d’un monde en perpétuel devenir.</p>
+        </div>
+        <button type="button" class="btn-fermer" data-toggle="detail-apropos">Fermer</button>
+      </section>
+      <section id="projets" class="section-pleine">
+        <div class="contenu-section2 reveal">
+          <h2 class="h2-apropos">Projets</h2>
+          <p class="presentation-acceuil">Quelques projets sélectionnés.</p>
+        </div>
+        <button type="button" class="btn-projets" data-toggle="detail-projets">Accéder aux projets</button>
+      </section>
+      <section id="detail-projets" class="section-pleine detail-section" style="display: none;">
+        <div class="contenu-section3 reveal">
+          <h2>Mes Projets</h2>
+
+          <div class="projets-grille">
+          <article class="carte-projet">
+              <h3>Snake.</h3>
+              <p>Un mini jeu des plus simples pour l'apprentissage de la logique mathématique et de la programmation dynamique. Cela illustre la gestion des structures de données en temps réel.</p><br>
+
+              <div id="snake-game">
+                <button id="lancerJeu">Jouer
+                </button>
+                <div id="jeu"></div>
+                <div id="score">Score : 0</div>
+               
+
+                <div class="snake-controls">
+                  <button class="snake-control" data-dir="up">▲</button>
+                  <div class="snake-controls-row">
+                    <button class="snake-control" data-dir="left">◀</button>
+                    <button class="snake-control" data-dir="down">▼</button>
+                    <button class="snake-control" data-dir="right">▶</button>
+                  </div>
+                </div>
+                 <br><p>Faites 3 points pour voir tous mes projets.</p>
+              </div>
+            </article>
+
+            <article class="carte-projet">
+              <h3>Base de donnée relationnelle. </h3>
+              <p>Conception d'une base de données optimisée : de l'analyse des besoins métier à la modélisation d'un schéma relationnel garantissant l'intégrité et la performance des données, l'actif le plus précieux d'une entreprise. La structuration est le socle de tout service informatique.</p><br>
+              <div class="image-projet"><img src="images/bd.jpg" alt="Base de donnée relationnelle"></div>
+            </article>
+            
+            <article class="carte-projet">
+              <h3>La virtualisation de serveurs.</h3>
+              <p>Cela transforme l'infrastructure en un outil agile. Je peux déployer un nouvel environnement de travail en quelques minutes au lieu de plusieurs jours pour assurer la continuité des activités. C'est la garantie d'une infrastructure qui ne s'arrête jamais.</p><br><br>
+              <div class="image-projet image-projet-clair"><img src="images/rh.jpg" alt="La virtualisation"></div>
+              <br><p> Cela réduit drastiquement les coûts d'acquisition, de maintenance et de consommation</p>
+            </article>
+          
+          </div>
+
+          <a href="/projets/projet.html" class="lien-tous-projets">
+            Voir toutes mes créations informatiques
+          </a>
+        </div>
+
+        <button type="button" class="btn-fermer" data-toggle="detail-projets">Fermer</button>
+      </section>
+    </div>
+    <section id="contact" class="section-pleine">
+      <div class="contenu-section reveal">
+        <h2>Contact</h2>
+        <p>v.daucourt@ecole-ipssi.net</p>
+        <p>06 12 34 56 78</p>
+        <p>Github : <a href="https://github.com/vidc01" target="_blank" rel="noopener">github.com/vidc01</a></p>
+        <p>LinkedIn : <a href="https://www.linkedin.com/in/victor-daucourt-22bb213ab/" target="_blank" rel="noopener">linkedin.com/in/victor-daucourt</a></p>
+      </div>
+    </section>
+  </main>
+  <script src="script.js?v=5"></script>
+  <script src="snake.js"></script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+:root {
+    --fond: #0a0a0a;
+    --carte-fond: rgba(255, 255, 255, 0.05);
+    --accent: #27ae60;
+    --texte: #ffffff;
+    --texte-mute: rgba(255, 255, 255, 0.7);
+}
+
+/* Correction fondamentale pour le responsive mobile */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--fond);
+    color: var(--texte);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    overflow-x: hidden; /* Empêche le balancement horizontal sur iPhone */
+}
+
+.arriere-plan {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top right, #1a1a1a, #000);
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.nav-retour {
+    padding: 2rem;
+}
+
+.btn-retour {
+    color: var(--texte-mute);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.btn-retour:hover {
+    color: var(--accent);
+}
+
+.header-projets {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.header-projets h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.grille-projets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.carte-projet {
+    background: var(--carte-fond);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.carte-projet:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.badge {
+    background: rgba(39, 174, 96, 0.2);
+    color: var(--accent);
+    padding: 0.2rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    width: fit-content;
+    margin-bottom: 1rem;
+}
+
+.carte-projet h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+}
+
+.carte-projet p {
+    color: var(--texte-mute);
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+.tags {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tags span {
+    font-size: 0.75rem;
+    color: var(--accent);
+    border: 1px solid rgba(39, 174, 96, 0.4);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* --- Système de Modale --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    margin: 5% auto;
+    padding: 40px;
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    color: white;
+    box-shadow: 0 0 30px rgba(39, 174, 96, 0.2);
+}
+
+.close-modal {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    color: #aaa;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1010;
+}
+
+.close-modal:hover {
+    color: var(--accent);
+}
+
+/* --- Contenu Interne Modale --- */
+.modal-detail-title { 
+    color: var(--accent); 
+    margin-bottom: 20px; 
+    font-size: 1.8rem;
+}
+
+.modal-detail-full-text { 
+    font-size: 1.1rem; 
+    line-height: 1.7; 
+    margin-bottom: 25px;
+}
+
+.img-container {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+}
+
+/* Cache le logo Gemini en bas à droite des images générées */
+.img-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #1a1a1a;
+    pointer-events: none;
+}
+
+.img-modal {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.btn-action {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-action:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+}
+
+/* --- Responsive Mobile (iPhone) --- */
+@media (max-width: 768px) {
+    .container { padding: 2rem 1rem; }
+    .header-projets h1 { font-size: 2.2rem; }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 25px;
+    }
+
+    .modal-detail-title { font-size: 1.4rem; }
+    .modal-detail-full-text { font-size: 1rem; }
+    
+    .btn-action {
+        width: 100%;
+        text-align: center;
+    }
+
+    .close-modal {
+        right: 15px;
+        top: 10px;
+        font-size: 30px;
+    }
+}
