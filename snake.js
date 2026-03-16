@@ -145,7 +145,7 @@ if (jeu && boutonLancer && scoreElement) {
 
       // redirection après 3 points
       if (score >= 3) {
-        alert("Bravo ! Vous avez atteint 3 points, je vous montre tous mes projets.");
+        alert("Bravo ! Passons aux choses sérieuses.");
         resetJeu(true);                // remet le jeu à zéro et stoppe le timer
         window.location.href = "projets/projet.html";
         return;                        // on arrête la fonction ici
