@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Projets - Portfolio</title>
     <link rel="stylesheet" href="style-projets.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double+Ink:wght@100..900&family=Datatype:wght@100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="arriere-plan"></div>
+    <canvas id="matrix-bg"></canvas>
     
     <nav class="nav-retour">
         <a href="../index.html" class="btn-retour">← Retour </a>
@@ -72,62 +76,74 @@
     </main>
 
     <div id="details-stockage" style="display: none;">
-        
         <div class="project-content" data-project="Virtualisation de Serveurs">
             <h2 class="modal-detail-title">Virtualisation de Serveurs</h2>
             <div class="img-container"><img src="../images/unnamed-1.jpg" class="img-modal" alt="imgServ"></div>
-            <p class="modal-detail-full-text">J’ai mis en place plusieurs infrastructures virtuelles complètes avec des hyperviseurs comme VMware et Proxmox, incluant la création de serveurs Linux et Windows Server. J’ai configuré les réseaux virtuels, la gestion du stockage et des snapshots afin d’assurer la haute disponibilité et la continuité de service. Des tests sur différents clients légers ont permis de valider la robustesse et la performance de l’environnement.</p>
-            <a href="https://fr.wikipedia.org/wiki/Virtualisation" class="btn-action">Pourquoi virtualiser ?</a>
-            <a href="https://fr.wikipedia.org/wiki/Hyperviseur" class="btn-action">Qu'est ce qu'un hyperviseur ? </a>
+            <p class="modal-detail-full-text">J'ai mis en place plusieurs infrastructures virtuelles complètes avec des hyperviseurs comme VMware et Proxmox, incluant la création de serveurs Linux et Windows Server. J'ai configuré les réseaux virtuels, la gestion du stockage et des snapshots afin d'assurer la haute disponibilité et la continuité de service. Des tests sur différents clients légers ont permis de valider la robustesse et la performance de l'environnement.</p>
+            <div class="btn-group">
+                <a href="https://fr.wikipedia.org/wiki/Virtualisation" class="btn-action">Pourquoi virtualiser ?</a>
+                <a href="https://fr.wikipedia.org/wiki/Hyperviseur" class="btn-action">Qu'est-ce qu'un hyperviseur ?</a>
+            </div>
         </div>
 
         <div class="project-content" data-project="Simulation Réseau Cisco">
             <h2 class="modal-detail-title">Simulation Réseau Cisco</h2>
             <div class="img-container"><img src="../images/unnamed-5.jpg" class="img-modal" alt="imgRes"></div>
-            <p class="modal-detail-full-text">J’ai conçu et simulé des architectures réseau sous Cisco Packet Tracer, en configurant des protocoles de couche 2 et 3 tels que VLAN, STP, RIP et OSPF. L’objectif était de reproduire des scénarios réels d’entreprise tout en assurant une segmentation efficace et une bonne tolérance aux pannes. Ces exercices m’ont permis de mieux comprendre le routage dynamique et la communication inter-réseaux.</p>
-            <a href="https://fr.wikipedia.org/wiki/R%C3%A9seau_informatique" class="btn-action">Qu'est ce qu'un réseau informatique ? </a>
-            <a href="https://fr.wikipedia.org/wiki/Packet_Tracer" class="btn-action">Qu'est ce que l'outil Cisco Packet Tracer ? </a>
+            <p class="modal-detail-full-text">J'ai conçu et simulé des architectures réseau sous Cisco Packet Tracer, en configurant des protocoles de couche 2 et 3 tels que VLAN, STP, RIP et OSPF. L'objectif était de reproduire des scénarios réels d'entreprise tout en assurant une segmentation efficace et une bonne tolérance aux pannes. Ces exercices m'ont permis de mieux comprendre le routage dynamique et la communication inter-réseaux.</p>
+            <div class="btn-group">
+                <a href="https://fr.wikipedia.org/wiki/R%C3%A9seau_informatique" class="btn-action">Qu'est-ce qu'un réseau informatique ?</a>
+                <a href="https://fr.wikipedia.org/wiki/Packet_Tracer" class="btn-action">Qu'est-ce que Cisco Packet Tracer ?</a>
+            </div>
         </div>
 
         <div class="project-content" data-project="Gestion de Base de Données">
             <h2 class="modal-detail-title">Gestion de Base de Données</h2>
             <div class="img-container"><img src="../images/unnamed-2.jpg" class="img-modal" alt="imgBdd"></div>
-            <p class="modal-detail-full-text">J’ai réalisé la conception complète d’une base de données relationnelle à partir d’un cahier des charges : modélisation du schéma et rédaction de requêtes préparées SQL pour optimiser la sécurité et la manipulation des données. J’ai aussi mis en œuvre des index et des vues pour améliorer les performances et simplifier l’extraction d’informations pertinentes.</p>
-            <a href="https://fr.wikipedia.org/wiki/Base_de_donn%C3%A9es_relationnelle" class="btn-action">Qu'est ce qu'une base de données relationnelle ? </a>
-            <a href="https://fr.wikipedia.org/wiki/SQL" class="btn-action">Qu'est ce que le language "SQL" ? </a>
+            <p class="modal-detail-full-text">J'ai réalisé la conception complète d'une base de données relationnelle à partir d'un cahier des charges : modélisation du schéma et rédaction de requêtes préparées SQL pour optimiser la sécurité et la manipulation des données. J'ai aussi mis en œuvre des index et des vues pour améliorer les performances et simplifier l'extraction d'informations pertinentes.</p>
+            <div class="btn-group">
+                <a href="https://fr.wikipedia.org/wiki/Base_de_donn%C3%A9es_relationnelle" class="btn-action">Base de données relationnelle</a>
+                <a href="https://fr.wikipedia.org/wiki/SQL" class="btn-action">Qu'est-ce que le langage SQL ?</a>
+            </div>
         </div>
 
         <div class="project-content" data-project="Interopérabilité Systèmes">
             <h2 class="modal-detail-title">Interopérabilité Systèmes</h2>
             <div class="img-container"><img src="../images/unnamed-6.jpg" class="img-modal" alt="imgInt"></div>
-            <p class="modal-detail-full-text">J’ai déployé un environnement mixte Windows/Linux avec mise en place de serveurs Samba et Active Directory pour la gestion centralisée des utilisateurs. Ce projet m’a permis de comprendre les mécanismes d’authentification, de partage de ressources et d’interconnexion entre systèmes hétérogènes, tout en assurant une sécurité renforcée des échanges.</p>
-            <a href="https://fr.wikipedia.org/wiki/Samba_(informatique)" class="btn-action">Pourquoi utiliser Samba ?</a>
-            <a href="https://fr.wikipedia.org/wiki/Active_Directory" class="btn-action">Qu'est ce qu'un Active Directory ? </a>
+            <p class="modal-detail-full-text">J'ai déployé un environnement mixte Windows/Linux avec mise en place de serveurs Samba et Active Directory pour la gestion centralisée des utilisateurs. Ce projet m'a permis de comprendre les mécanismes d'authentification, de partage de ressources et d'interconnexion entre systèmes hétérogènes, tout en assurant une sécurité renforcée des échanges.</p>
+            <div class="btn-group">
+                <a href="https://fr.wikipedia.org/wiki/Samba_(informatique)" class="btn-action">Pourquoi utiliser Samba ?</a>
+                <a href="https://fr.wikipedia.org/wiki/Active_Directory" class="btn-action">Qu'est-ce qu'un Active Directory ?</a>
+            </div>
         </div>
 
         <div class="project-content" data-project="Assistant Conversationnel">
             <h2 class="modal-detail-title">Assistant Conversationnel</h2>
             <div class="img-container"><img src="../images/unnamed-4.jpg" class="img-modal" alt="imgIA"></div>
-            <p class="modal-detail-full-text">J’ai conçu un chatbot intelligent en Python capable de traiter des requêtes simples grâce à des API et à des modèles de traitement du langage. Le bot peut interagir de façon contextuelle avec l’utilisateur, gérer différentes intentions et adapter ses réponses dynamiquement. Ce projet m’a permis d’approfondir mes compétences en IA, en logique conversationnelle et en intégration API.</p>
-            <a href="https://fr.wikipedia.org/wiki/Agent_conversationnel" class="btn-action">Qu'est ce qu'un agent conversationnel ? </a>
-            <a href="https://fr.wikipedia.org/wiki/Traitement_automatique_du_langage_naturel" class="btn-action">Qu'est ce que le traitement du langage naturel ? </a>
+            <p class="modal-detail-full-text">J'ai conçu un chatbot intelligent en Python capable de traiter des requêtes simples grâce à des API et à des modèles de traitement du langage. Le bot peut interagir de façon contextuelle avec l'utilisateur, gérer différentes intentions et adapter ses réponses dynamiquement. Ce projet m'a permis d'approfondir mes compétences en IA, en logique conversationnelle et en intégration API.</p>
+            <div class="btn-group">
+                <a href="https://fr.wikipedia.org/wiki/Agent_conversationnel" class="btn-action">Qu'est-ce qu'un agent conversationnel ?</a>
+                <a href="https://fr.wikipedia.org/wiki/Traitement_automatique_du_langage_naturel" class="btn-action">Traitement du langage naturel</a>
+            </div>
         </div>
 
         <div class="project-content" data-project="Site Vitrine Professionnel">
             <h2 class="modal-detail-title">Site Vitrine Professionnel</h2>
             <div class="img-container"><img src="../images/unnamed-3.jpg" class="img-modal" alt="imgWeb"></div>
-            <p class="modal-detail-full-text">J’ai développé un site web moderne et responsive en utilisant HTML5, CSS Grid, Flexbox et JavaScript. L’objectif était de créer une interface fluide et professionnelle, intégrant un design cohérent et des animations légères. J’ai également optimisé les performances et la compatibilité sur différents navigateurs pour offrir une expérience utilisateur homogène.</p>
-            <a href="https://fr.wikipedia.org/wiki/Hypertext_Markup_Language" class="btn-action">Qu'est ce que le language "HTML" ? </a>
-            <a href="https://fr.wikipedia.org/wiki/Cascading_Style_Sheets" class="btn-action">Et le "CSS" ? </a>
+            <p class="modal-detail-full-text">J'ai développé un site web moderne et responsive en utilisant HTML5, CSS Grid, Flexbox et JavaScript. L'objectif était de créer une interface fluide et professionnelle, intégrant un design cohérent et des animations légères. J'ai également optimisé les performances et la compatibilité sur différents navigateurs pour offrir une expérience utilisateur homogène.</p>
+            <div class="btn-group">
+                <a href="https://fr.wikipedia.org/wiki/Hypertext_Markup_Language" class="btn-action">Qu'est-ce que le langage HTML ?</a>
+                <a href="https://fr.wikipedia.org/wiki/Cascading_Style_Sheets" class="btn-action">Et le CSS ?</a>
+            </div>
         </div>
 
         <div class="project-content" data-project="Programmation Dynamique">
             <h2 class="modal-detail-title">Programmation Dynamique</h2>
             <div class="img-container"><img src="../images/unnamed.jpg" class="img-modal" alt="imgSnake"></div>
-            <p class="modal-detail-full-text">J’ai codé un jeu interactif en JavaScript, intégrant une logique de déplacement dynamique, une détection précise des collisions et un système de score évolutif. Ce projet m’a surtout permis de renforcer mes compétences en algorithmique, en gestion des événements clavier et en manipulation du Document Object Model.</p>
-            <a href="https://fr.wikipedia.org/wiki/JavaScript" class="btn-action">Qu'est ce que le language "JavaScript" ? </a>
-             <a href="https://fr.wikipedia.org/wiki/Programmation_de_jeux_vid%C3%A9o" class="btn-action">Pourquoi en faire un jeu ?</a>
-
+            <p class="modal-detail-full-text">J'ai codé un jeu interactif en JavaScript, intégrant une logique de déplacement dynamique, une détection précise des collisions et un système de score évolutif. Ce projet m'a surtout permis de renforcer mes compétences en algorithmique, en gestion des événements clavier et en manipulation du Document Object Model.</p>
+            <div class="btn-group">
+                <a href="https://fr.wikipedia.org/wiki/JavaScript" class="btn-action">Qu'est-ce que le langage JavaScript ?</a>
+                <a href="https://fr.wikipedia.org/wiki/Programmation_de_jeux_vid%C3%A9o" class="btn-action">Pourquoi en faire un jeu ?</a>
+            </div>
         </div>
     </div>
 

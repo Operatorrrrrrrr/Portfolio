@@ -1,8 +1,70 @@
+
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('matrix-bg');
+    const ctx = canvas.getContext('2d');
+    
+    let columns = 0;
+    let drops = [];
+    const fontSize = 14;
+    const chars = '01';
+    let animationId = null;
+    let isRunning = false;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        columns = Math.floor(canvas.width / fontSize);
+        drops = Array(columns).fill(1);
+    }
+
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#00ff41';
+        ctx.font = `${fontSize}px monospace`;
+        
+        for (let i = 0; i < drops.length; i++) {
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+
+    function animateMatrix() {
+        if (!isRunning) return;
+        drawMatrix();
+        animationId = requestAnimationFrame(animateMatrix);
+    }
+
+    window.startMatrix = function() {
+        if (isRunning) return;
+        isRunning = true;
+        canvas.classList.add('active');
+        resizeCanvas();
+        animateMatrix();
+    };
+
+    window.stopMatrix = function() {
+        isRunning = false;
+        canvas.classList.remove('active');
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    };
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const cartes = document.querySelectorAll('.carte-projet');
     
     cartes.forEach((carte, index) => {
-        // Apparition décalée pour chaque carte
+        
         carte.style.opacity = '0';
         carte.style.transform = 'translateY(20px)';
         carte.style.transition = 'all 0.5s ease-out';
@@ -13,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100 * index);
     });
 });
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const cartes = document.querySelectorAll('.carte-projet');
@@ -26,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // --- Animation d'entrée et Initialisation des cartes ---
+   
     cartes.forEach((carte, index) => {
         // Initialisation pour l'animation
         carte.style.opacity = '0';
@@ -42,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             carte.style.transform = 'translateY(0)';
         }, 100 * index);
 
-        // --- Gestion du Clic pour ouverture modale ---
+        
         carte.addEventListener('click', () => {
             // .trim() est crucial pour nettoyer le texte
             const titreCarte = carte.querySelector('h3').innerText.trim();
@@ -54,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Injection du contenu HTML complet du template
                 modalBody.innerHTML = template.innerHTML;
             } else {
-                // Contenu de secours si le template est manquant
+              
                 modalBody.innerHTML = `
                     <div class="modal-gabarit-simple">
                         <h2 class="modal-title">${titreCarte}</h2>
@@ -69,22 +130,27 @@ document.addEventListener('DOMContentLoaded', () => {
             // Affichage de la modale et blocage du scroll arrière
             modal.style.display = "block";
             document.body.style.overflow = "hidden";
+            
+            // 🔥 MATRIX START - AJOUT ICI
+            startMatrix();
         });
     });
 
-    // --- Fonctions de Fermeture ---
+  
     const fermerModale = () => {
         modal.style.display = "none";
         // Restauration du scroll de la page
         document.body.style.overflow = "auto";
         // Optionnel : vider le contenu pour repartir propre
         setTimeout(() => { modalBody.innerHTML = ''; }, 300);
+        
+        // 🔥 MATRIX STOP - AJOUT ICI
+        stopMatrix();
     };
 
-    // Clic sur le bouton 'X'
     closeBtn.addEventListener('click', fermerModale);
 
-    // Clic en dehors de la fenêtre de la modale
+   
     window.addEventListener('click', (event) => {
         if (event.target == modal) {
             fermerModale();

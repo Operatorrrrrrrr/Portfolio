@@ -6,7 +6,6 @@
     --texte-mute: rgba(255, 255, 255, 0.7);
 }
 
-/* Correction fondamentale pour le responsive mobile */
 * {
     box-sizing: border-box;
 }
@@ -14,11 +13,13 @@
 body {
     background-color: var(--fond);
     color: var(--texte);
-    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Mulish', sans-serif;  /* TOUT EN MULISH */
     margin: 0;
     line-height: 1.6;
-    overflow-x: hidden; /* Empêche le balancement horizontal sur iPhone */
+    overflow-x: hidden;
 }
+
+
 
 .arriere-plan {
     position: fixed;
@@ -26,6 +27,7 @@ body {
     background: radial-gradient(circle at top right, #1a1a1a, #000);
     z-index: -1;
 }
+
 
 .container {
     max-width: 1200px;
@@ -122,7 +124,7 @@ body {
     border-radius: 4px;
 }
 
-/* --- Système de Modale --- */
+/* Système de Modale */
 .modal {
     display: none;
     position: fixed;
@@ -130,7 +132,7 @@ body {
     inset: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0);
     backdrop-filter: blur(8px);
     overflow-y: auto;
 }
@@ -163,7 +165,6 @@ body {
     color: var(--accent);
 }
 
-/* --- Contenu Interne Modale --- */
 .modal-detail-title { 
     color: var(--accent); 
     margin-bottom: 20px; 
@@ -173,19 +174,18 @@ body {
 .modal-detail-full-text { 
     font-size: 1.1rem; 
     line-height: 1.7; 
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .img-container {
     width: 100%;
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     border: 1px solid rgba(255,255,255,0.1);
     position: relative;
 }
 
-/* Cache le logo Gemini en bas à droite des images générées */
 .img-container::after {
     content: "";
     position: absolute;
@@ -204,15 +204,30 @@ body {
     object-fit: cover;
 }
 
+/* ✅ BOUTONS CORRIGÉS - ESPACE FORCÉ */
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;        /* ESPACE TRÈS VISIBLE */
+    width: 100%;
+    margin-top: 35px; /* ESPACE AU-DESSUS */
+}
+
 .btn-action {
-    display: inline-block;
+    display: block !important;     /* FORCE BLOCK */
     background: var(--accent);
     color: white;
-    padding: 12px 25px;
+    padding: 16px 25px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
+    text-align: center;
     transition: transform 0.2s, opacity 0.2s;
+    width: 100% !important;        /* FORCE 100% */
+    box-sizing: border-box;
+    border: none;
+    min-height: 60px;              /* HAUTEUR TACTILE */
+    font-size: 1rem;
 }
 
 .btn-action:hover {
@@ -220,23 +235,45 @@ body {
     opacity: 0.9;
 }
 
-/* --- Responsive Mobile (iPhone) --- */
+/* Responsive Mobile */
 @media (max-width: 768px) {
-    .container { padding: 2rem 1rem; }
-    .header-projets h1 { font-size: 2.2rem; }
+    .container { 
+        padding: 2rem 1rem; 
+    }
+    
+    .header-projets h1 { 
+        font-size: 2.2rem; 
+    }
+    
+    .grille-projets {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
     
     .modal-content {
         width: 95%;
-        margin: 10% auto;
+        margin: 8% auto;
         padding: 25px;
     }
 
-    .modal-detail-title { font-size: 1.4rem; }
-    .modal-detail-full-text { font-size: 1rem; }
+    .modal-detail-title { 
+        font-size: 1.4rem; 
+    }
+    
+    .modal-detail-full-text { 
+        font-size: 1rem; 
+        margin-bottom: 25px;
+    }
+    
+    .btn-group {
+        gap: 22px;         /* ENCORE PLUS SUR MOBILE */
+        margin-top: 30px;
+    }
     
     .btn-action {
-        width: 100%;
-        text-align: center;
+        padding: 20px 20px;
+        font-size: 1.05rem;
+        min-height: 65px;  /* PARFAIT POUR LE DOIGT */
     }
 
     .close-modal {
@@ -244,4 +281,43 @@ body {
         top: 10px;
         font-size: 30px;
     }
+}
+
+/* Très petits écrans */
+@media (max-width: 480px) {
+    .container { 
+        padding: 1.5rem 0.5rem; 
+    }
+    
+    .modal-content {
+        width: 98%;
+        margin: 5% auto;
+        padding: 20px;
+    }
+    
+    .btn-group {
+        gap: 20px;
+    }
+    
+    .btn-action {
+        padding: 18px 18px;
+        min-height: 60px;
+    }
+}
+/* À LA FIN de ton CSS */
+#matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;        /* JUSTE EN-DESSOUS de .modal (1000) */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+}
+
+#matrix-bg.active {
+    opacity: 1 !important;
+    mix-blend-mode: screen;  /* FAIT POP LE VERT */
 }
