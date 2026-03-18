@@ -117,7 +117,7 @@ body {
     overflow: hidden;
     position: relative;
     backdrop-filter: blur(4px);
-    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease, opacity 0.35s ease;
 }
 
 .nav-droite .lien-nav:hover,
@@ -146,6 +146,17 @@ body {
 .nav-droite.compact .lien-nav::before {
     content: attr(data-icon);
     font-size: 1.25rem;
+}
+
+/* En mode compact, les inactifs gardent leur rond mais sans emoji */
+.nav-droite.compact .lien-nav:not(.active)::before {
+    content: '';
+}
+
+/* Au survol d'un lien inactif, l'emoji réapparaît */
+.nav-droite.compact .lien-nav:not(.active):hover::before,
+.nav-droite.compact .lien-nav:not(.active):focus::before {
+    content: attr(data-icon);
 }
 
 /* En mode compact, hover = simple éclaircissement (pas de déplacement) */

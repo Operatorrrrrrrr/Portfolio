@@ -321,3 +321,11 @@ body {
     opacity: 1 !important;
     mix-blend-mode: screen;  /* FAIT POP LE VERT */
 }
+
+footer {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
