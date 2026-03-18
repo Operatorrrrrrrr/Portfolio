@@ -1,56 +1,67 @@
+/* =============================================================================
+   VARIABLES GLOBALES
+   Modifier ces valeurs pour changer le thème du site entier.
+   ============================================================================= */
 :root {
-    --transition-fond: 800ms;
-    --couleur-fond: #000000;
-    --texte-mute: rgba(255,255,255,0.85);
-    --nav-fond: rgba(255,255,255,0.06);   /* bouton (léger) */
-    --nav-fond-survol: rgba(255,255,255,0.14); /* au survol */
-    --rayon-nav: 999px;
+    --transition-fond    : 800ms;
+    --couleur-fond       : #000000;
+    --texte-mute         : rgba(255, 255, 255, 0.85);
+    --nav-fond           : rgba(255, 255, 255, 0.06);
+    --nav-fond-survol    : rgba(255, 255, 255, 0.14);
+    --rayon-nav          : 999px;
+    --padding-section    : 12vh 8vw;
+    --max-largeur-texte  : clamp(20rem, 90%, 47.5rem);
 }
 
-/* --- Reset / base -------------------------------------------------------- */
-* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
-html { 
+
+/* =============================================================================
+   RESET & BASE
+   ============================================================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
     scroll-behavior: smooth;
     font-size: 16px;
-    scroll-timeline: auto;
 }
+
 body {
+    margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     color: #111;
     background: var(--couleur-fond);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
-.presentation-acceuil {
-    font-size: clamp(0.875rem, 3vw, 1.125rem);
-    padding-bottom: 3vh;
-}
 
-/* --- Background layers --- */
+/* =============================================================================
+   ARRIÈRE-PLAN & OVERLAY
+   Calques fixes derrière tout le contenu.
+   ============================================================================= */
 .arriere-plan {
     position: fixed;
     inset: 0;
     z-index: -100;
     pointer-events: none;
 }
+
 .calque-fond {
     position: absolute;
     inset: 0;
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     opacity: 0;
     transition: opacity var(--transition-fond) ease, filter var(--transition-fond);
     will-change: opacity, filter;
 }
 
 .calque-fond.calque-a { opacity: 1; }
+.calque-fond.visible  { opacity: 1; filter: blur(0); }
 
+/* Overlay léger par-dessus les fonds */
 .overlay {
     position: fixed;
     inset: 0;
@@ -59,21 +70,24 @@ body {
     background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.18));
 }
 
-/* --- Big faded title (filigrane) ----------------------------- */
+/* Titre décoratif en filigrane */
 .titre-filigrane {
     position: fixed;
     left: 6vw;
     top: 40vh;
     font-size: clamp(3rem, 9vw, 8rem);
     line-height: 0.8;
-    color: rgba(255,255,255,0.06);
+    color: rgba(255, 255, 255, 0.06);
     font-weight: 700;
     pointer-events: none;
     z-index: 10;
     white-space: nowrap;
 }
 
-/* --- Right vertical nav -------------------------------------- */
+
+/* =============================================================================
+   NAVIGATION VERTICALE (droite)
+   ============================================================================= */
 .nav-droite {
     position: fixed;
     right: 1.5rem;
@@ -83,11 +97,6 @@ body {
     flex-direction: column;
     gap: 0.75rem;
     z-index: 30;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-droite.compact {
-    width: 3.5rem;
 }
 
 .nav-droite .lien-nav {
@@ -95,49 +104,20 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0.75rem 0.875rem;
+    margin: 0.25rem;
+    min-width: 2.5rem;
     border-radius: var(--rayon-nav);
     background: var(--nav-fond);
     color: var(--texte-mute);
     text-decoration: none;
     font-weight: 600;
-    letter-spacing: 0.04em;
-    transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, min-width 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin-right 0.4s cubic-bezier(0.4, 0, 0.2, 1), font-size 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(4px);
-    text-align: center;
-    margin: 0.75rem;
     font-size: clamp(0.875rem, 1vw, 1rem);
-    min-width: 2.5rem;
+    letter-spacing: 0.04em;
     white-space: nowrap;
     overflow: hidden;
     position: relative;
-}
-
-.nav-droite.compact .lien-nav {
-    min-width: 2.5rem;
-    padding: 0.75rem;
-    font-size: 0;
-    position: relative;
-}
-
-.nav-droite.compact .lien-nav::before {
-    content: attr(data-icon);
-    font-size: 1.25rem;
-    margin-right: 0;
-}
-
-.nav-droite.compact .lien-nav:hover,
-.nav-droite.compact .lien-nav:focus {
-    min-width: 7.5rem;
-    padding: 0.75rem 0.875rem;
-    font-size: clamp(0.875rem, 1vw, 1rem);
-    margin-left: -5rem;
-    margin-right: 0.75rem;
-}
-
-.nav-droite.compact .lien-nav:hover::before,
-.nav-droite.compact .lien-nav:focus::before {
-    content: attr(data-icon);
-    margin-right: 0.5rem;
+    backdrop-filter: blur(4px);
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 
 .nav-droite .lien-nav:hover,
@@ -147,40 +127,143 @@ body {
     color: #fff;
 }
 
+.nav-droite .lien-nav:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.18);
+    outline-offset: 0.1875rem;
+}
+
 .nav-droite .lien-nav.active {
     background: var(--nav-fond-survol);
     color: #fff;
 }
 
-.nav-droite .lien-nav:focus {
-    outline: 2px solid rgba(255,255,255,0.18);
-    outline-offset: 0.1875rem;
+/* --- Mode compact : icônes uniquement (toutes sections sauf Accueil) --- */
+.nav-droite.compact .lien-nav {
+    padding: 0.75rem;
+    font-size: 0;
 }
 
-/* --- Content / sections ------------------------------------- */
-.contenu { position: relative; z-index: 20; }
+.nav-droite.compact .lien-nav::before {
+    content: attr(data-icon);
+    font-size: 1.25rem;
+}
+
+/* En mode compact, hover = simple éclaircissement (pas de déplacement) */
+.nav-droite.compact .lien-nav:hover,
+.nav-droite.compact .lien-nav:focus {
+    transform: none;
+    background: var(--nav-fond-survol);
+    color: #fff;
+}
+
+
+/* =============================================================================
+   LAYOUT — SECTIONS
+   ============================================================================= */
+.contenu {
+    position: relative;
+    z-index: 20;
+}
+
 .section-pleine {
-    min-height: 100svh;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 12vh 8vw;
+    padding: var(--padding-section);
     position: relative;
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
-    background-attachment: scroll;
 }
 
-.contenu-section {
-    max-width: clamp(20rem, 90%, 47.5rem);
+/* Typographie commune */
+.section-pleine h1 { font-size: clamp(1.75rem, 6vw, 3.5rem); margin: 0 0 0.5rem; }
+.section-pleine h2 { font-size: clamp(1.375rem, 4vw, 2.25rem); margin: 0 0 0.625rem; }
+.section-pleine p  { color: rgba(255, 255, 255, 0.9); margin: 0; line-height: 1.6; }
+
+/* Propriétés partagées par tous les conteneurs de texte */
+.contenu-section,
+.contenu-section1,
+.contenu-section2,
+.contenu-section3 {
+    max-width: var(--max-largeur-texte);
     color: #fff;
-    text-shadow: 0 0.0625rem 0.625rem rgba(0,0,0,0.45);
+    text-shadow: 0 0.0625rem 0.625rem rgba(0, 0, 0, 0.45);
     position: relative;
     z-index: 1;
-    margin: auto;
 }
 
+/* Contact : centré */
+.contenu-section { margin: auto; }
+
+/* Accueil */
+.contenu-section1 {
+    margin-top: -8rem;
+    margin-bottom: clamp(10rem, 30vh, 18.75rem);
+}
+
+/* À propos & Projets */
+.contenu-section2 {
+    margin-bottom: clamp(9rem, 28vh, 17.5rem);
+}
+
+/* Sections détail */
+.contenu-section3 {
+    margin-bottom: -8vh;
+}
+
+/* La section détail-projets est plus large pour accueillir le carousel */
+#detail-projets .contenu-section3 {
+    max-width: min(96vw, 960px);
+    width: 100%;
+}
+
+.presentation-acceuil {
+    font-size: clamp(0.875rem, 3vw, 1.125rem);
+    padding-bottom: 3vh;
+}
+
+.h2-apropos { padding-bottom: clamp(4vh, 8vh, 10vh); }
+.souligne   { text-decoration: underline; }
+
+
+/* =============================================================================
+   FONDS DES SECTIONS
+   ============================================================================= */
+#accueil {
+    background-image: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Image de fond Accueil, retournée horizontalement */
+#accueil::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin-top: clamp(8rem, 20vh, 12.5rem);
+    background-image: url('images/bgmac.jpg');
+    background-size: cover;
+    background-position: center;
+    transform: scaleX(-1);
+    filter: blur(0.3px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Fond partagé des sections À propos & Projets */
+.groupe-apropos-projets {
+    position: relative;
+    overflow: hidden;
+    background-image: url('images/testo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#contact { background-image: url('images/bgclav.jpg'); }
+
+/* --- Section Contact --- */
 #contact .contenu-section h2 { text-align: center; }
 
 #contact .contenu-section p {
@@ -202,122 +285,36 @@ body {
 
 #contact .contenu-section a:hover { color: #80c0ff; }
 
-.contenu-section1 {
-    margin-top: -8rem;
-    margin-bottom: clamp(10rem, 30vh, 18.75rem);
-    max-width: clamp(20rem, 90%, 47.5rem);
-    color: #fff;
-    text-shadow: 0 0.0625rem 0.625rem rgba(0,0,0,0.45);
-    position: relative;
-    z-index: 1;
-}
 
-.contenu-section2 {
-    margin-bottom: clamp(9rem, 28vh, 17.5rem);
-    max-width: clamp(20rem, 90%, 47.5rem);
-    color: #fff;
-    text-shadow: 0 0.0625rem 0.625rem rgba(0,0,0,0.45);
-    position: relative;
-    z-index: 1;
-}
-
-.contenu-section3 {
-    margin-bottom: -8vh;
-    max-width: clamp(20rem, 90%, 47.5rem);
-    color: #fff;
-    text-shadow: 0 0.0625rem 0.625rem rgba(0,0,0,0.45);
-    position: relative;
-    z-index: 1;
-}
-
-.h2-apropos { padding-bottom: clamp(4vh, 8vh, 10vh); }
-
-.section-pleine h1 { font-size: clamp(1.75rem, 6vw, 3.5rem); margin: 0 0 0.5rem; }
-.section-pleine h2 { font-size: clamp(1.375rem, 4vw, 2.25rem); margin: 0 0 0.625rem; }
-.section-pleine p  { color: rgba(255,255,255,0.9); margin: 0; line-height: 1.6; }
-
-/* --- Section backgrounds --- */
-#accueil      { background-image: none; position: relative; overflow: hidden; }
-#contact      { background-image: url('images/bgclav.jpg'); }
-
-.groupe-apropos-projets {
-    position: relative;
-    overflow: hidden;
-    background-image: url('images/testo.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-}
-
-@media (max-width: 900px) {
-    .section-pleine { background-attachment: scroll; }
-}
-
-#accueil::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    transform: scaleX(-1);
-    margin-top: clamp(8rem, 20vh, 12.5rem);
-    background-image:url(images/bgmac.jpg);
-    background-size: cover;
-    background-position: center center;
-    filter: blur(0.3px);    
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* --- Responsive tweaks --- */
-@media (max-width: 45rem) {
-    .titre-filigrane { display: none; }
-    .nav-droite { right: 0.5rem; gap: 0.4rem; }
-    .nav-droite.compact { width: auto; }
-    .nav-droite .lien-nav { 
-        padding: 0; 
-        margin: 0.25rem;
-        width: 1.2rem;
-        height: 1.2rem;
-        min-width: 0;
-        border-radius: 50%;
-        font-size: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: none;
-    }
-    .nav-droite.compact .lien-nav,
-    .nav-droite.compact .lien-nav:hover,
-    .nav-droite.compact .lien-nav:focus,
-    .nav-droite.compact .lien-nav:active {
-        min-width: 0; padding: 0; margin: 0.25rem; margin-left: 0;
-        font-size: 0; overflow: hidden; text-indent: -9999px;
-    }
-    .nav-droite .lien-nav::before, .nav-droite.compact .lien-nav::before { content: ""; display: none; }
-    .nav-droite .lien-nav.active { background: var(--nav-fond-survol); }
-    .nav-droite .lien-nav:hover, .nav-droite .lien-nav:focus { transform: none; }
-    .section-pleine { padding: 10vh 5vw; }
-    .contenu-section1 { margin-bottom: clamp(6rem, 20vh, 12rem); }
-    .contenu-section2 { margin-bottom: clamp(5rem, 18vh, 10rem); }
-}
-
-@media (min-width: 45.0625rem) and (max-width: 64rem) {
-    .nav-droite { right: 1.25rem; }
-    .section-pleine { padding: 11vh 6vw; }
-}
-
-/* --- Helpers & Reveal --- */
-.calque-fond.visible { opacity: 1; filter: blur(0); }
+/* =============================================================================
+   ANIMATIONS AU SCROLL (reveal)
+   Le JS ajoute la classe "visible" quand l'élément entre dans le viewport.
+   ============================================================================= */
 .reveal {
     opacity: 0;
     transform: translate3d(0, 1.875rem, 0);
     transition: opacity 0.7s ease-out, transform 0.7s ease-out;
     will-change: opacity, transform;
 }
-.reveal.visible { opacity: 1; transform: translate3d(0, 0, 0); will-change: auto; }
-.reveal p, .reveal h2 { opacity: 0; transition: opacity 0.3s ease-in-out; }
 
-/* --- Boutons globaux --- */
+.reveal.visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+}
+
+.reveal p,
+.reveal h2 {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+/* =============================================================================
+   BOUTONS FLOTTANTS
+   Tous les éléments dont la classe commence par "btn-" partagent ce style de base.
+   Note : .btn-zoom-carte (injecté par JS) surcharge ces styles juste en-dessous.
+   ============================================================================= */
 [class*="btn-"] {
     position: absolute;
     display: inline-flex;
@@ -329,181 +326,668 @@ body {
     color: var(--texte-mute);
     border: none;
     font-weight: 600;
-    letter-spacing: 0.04em;
-    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, opacity 0.6s ease;
-    backdrop-filter: blur(4px);
-    z-index: 5;
     font-size: 1rem;
-    cursor: pointer;
+    letter-spacing: 0.04em;
     text-align: center;
     text-decoration: none;
+    cursor: pointer;
     appearance: none;
+    backdrop-filter: blur(4px);
+    z-index: 5;
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, opacity 0.6s ease;
 }
 
-[class*="btn-"]:focus { outline: 2px solid rgba(255,255,255,0.18); outline-offset: 0.1875rem; }
+[class*="btn-"]:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.18);
+    outline-offset: 0.1875rem;
+}
 
-.btn-projets:hover, .btn-projets:focus, .btn-apropos:hover, .btn-apropos:focus, 
-.btn-telecharger:hover, .btn-telecharger:focus, .btn-fermer:hover, .btn-fermer:focus {
+/* Hover des boutons de section (restent centrés via translateX) */
+.btn-projets:hover,     .btn-projets:focus,
+.btn-apropos:hover,     .btn-apropos:focus,
+.btn-telecharger:hover, .btn-telecharger:focus,
+.btn-fermer:hover,      .btn-fermer:focus {
     transform: translateX(-50%) translateY(-0.25rem);
     background: var(--nav-fond-survol);
     color: #fff;
-    box-shadow: 0 0.375rem 1.25rem rgba(0,0,0,0.3);
+    box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.3);
 }
 
-.btn-projets { bottom: 15vh; left: 50%; transform: translateX(-50%); opacity: 0; }
-.btn-apropos { bottom: 30vh; left: 64%; transform: translateX(-50%); opacity: 0; }
+/* Positions et états initiaux */
+.btn-projets     { bottom: 15vh; left: 50%; transform: translateX(-50%); opacity: 0; }
+.btn-apropos     { bottom: 30vh; left: 64%; transform: translateX(-50%); opacity: 0; }
 .btn-telecharger { bottom: 16vh; left: 65%; transform: translateX(-50%); opacity: 0; }
-.btn-projets.visible, .btn-apropos.visible, .btn-telecharger.visible { opacity: 1; }
-.btn-fermer { bottom: 5vh; left: 50%; transform: translateX(-50%); }
+.btn-fermer      { bottom:  5vh; left: 50%; transform: translateX(-50%); }
 
-@media (max-width: 45rem) {
-    .btn-projets { left: 50%; bottom: 15vh; padding: 0.75rem 1.25rem; font-size: 0.875rem; }
-    .btn-apropos { left: 50%; bottom: 16vh; padding: 0.75rem 1.25rem; font-size: 0.875rem; }
-    .btn-telecharger { left: 50%; bottom: 8vh; padding: 0.75rem 1.25rem; font-size: 0.875rem; }
-    .btn-fermer { padding: 0.75rem 1.25rem; font-size: 0.875rem; }
+/* Le JS ajoute "visible" pour révéler les boutons flottants */
+.btn-projets.visible,
+.btn-apropos.visible,
+.btn-telecharger.visible {
+    opacity: 1;
 }
 
-/* --- Section détail (popup) --- */
+
+/* =============================================================================
+   SECTIONS DÉTAIL
+   ============================================================================= */
 .detail-section {
-    animation: slideIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     background: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(0,0,0,0.98));
     min-height: 70vh;
     position: relative;
-    scroll-margin-top: 12vh;
     padding: 12vh 8vw 20vh;
+    scroll-margin-top: 12vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    animation: slideIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .detail-section::before {
-    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
     background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.18));
 }
-.detail-section > *:not(.btn-fermer) { position: relative; z-index: 2; }
-.detail-section.hidden { animation: slideOut 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 
-@keyframes slideIn { 0% { opacity: 0; transform: translateY(40px) scaleY(0.95); } 100% { opacity: 1; transform: translateY(0) scaleY(1); } }
-@keyframes slideOut { 0% { opacity: 1; transform: translateY(0) scaleY(1); } 100% { opacity: 0; transform: translateY(-40px) scaleY(0.95); } }
-
-.souligne { text-decoration: underline; }
-
-/* ==========================================================================
-   Snake game & Projets - Section Corrigée
-   ========================================================================== */
-
-.projets-grille {
-    display: flex; gap: 1.5rem; margin-top: 1.5rem; margin-bottom: 2rem;
-    flex-wrap: nowrap; overflow-x: auto;
-}
-  
-.carte-projet {
-    min-width: 260px; max-width: 320px; flex: 0 0 auto;
-    background: rgba(255, 255, 255, 0.06);
-    padding: 1.25rem 1.5rem; border-radius: 1rem;
-    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
-    overflow: hidden; display: flex; flex-direction: column;
+.detail-section > *:not(.btn-fermer) {
+    position: relative;
+    z-index: 2;
 }
 
-.carte-projet > p { min-height: 4.5em; }
-.carte-projet:has(.image-projet) > p { min-height: calc(4.5em + 2rem); }
-  
+.detail-section.hidden {
+    animation: slideOut 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Layout propre de la section détail-projets */
+#detail-projets {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    padding: 12vh 8vw 8vh;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(40px) scaleY(0.95); }
+    to   { opacity: 1; transform: translateY(0) scaleY(1); }
+}
+
+@keyframes slideOut {
+    from { opacity: 1; transform: translateY(0) scaleY(1); }
+    to   { opacity: 0; transform: translateY(-40px) scaleY(0.95); }
+}
+
+
+/* =============================================================================
+   CAROUSEL DE PROJETS
+   ============================================================================= */
+
+/* Lien vers la page de tous les projets */
 .lien-tous-projets {
-    /* Changements pour l'alignement à droite */
-    display: block;
-    width: fit-content;
-    margin-left: auto;
-    
-    /* Tes styles d'origine conservés */
-    margin-top: 0.5rem; 
+    display: inline-block;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
     padding: 0.75rem 1.5rem;
-    border-radius: 999px; 
-    background: var(--nav-fond); 
+    border-radius: 999px;
+    background: var(--nav-fond);
     color: var(--texte-mute);
-    text-decoration: none; 
-    font-weight: 600; 
+    text-decoration: none;
+    font-weight: 600;
     backdrop-filter: blur(4px);
     transition: background 0.3s, transform 0.3s;
 }
-  
-.lien-tous-projets:hover { background: var(--nav-fond-survol); color: #fff; transform: translateY(-0.15rem); }
-  
-/* --- LE JEU SNAKE CORRIGÉ (FOND NOIR RESTREINT) --- */
-#snake-game {
-    margin-top: 0.5rem;
-    padding: 0;               /* Suppression du padding noir global */
-    background: transparent;  /* On voit le gris de la carte autour */
+
+.lien-tous-projets:hover {
+    background: var(--nav-fond-survol);
+    color: #fff;
+    transform: translateY(-0.15rem);
+}
+
+/* En-tête (titre + lien) */
+.header-projets {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 2rem 0;
+    width: 100%;
+    max-width: var(--max-largeur-texte);
+}
+
+/* Zone centrée autour du carousel */
+.conteneur-carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 60vh;
+    padding: 2rem 0;
+    flex-grow: 1;
+}
+
+.carousel-projets {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Piste 3D */
+.carousel-track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1100px;
+    min-height: 420px;
+    width: 100%;
+}
+
+/* --- Cartes --- */
+.carte-projet {
+    position: absolute;
+    width: 280px;
+    height: 420px;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    user-select: none;
+    will-change: transform, opacity;
+    transform-style: preserve-3d;
+    transition:
+        transform   0.65s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity     0.65s ease,
+        box-shadow  0.65s ease;
+}
+
+.carte-projet[data-carousel-pos="active"] {
+    transform: translateX(0) scale(1) rotateY(0deg);
+    opacity: 1;
+    z-index: 3;
+    cursor: default;
+    pointer-events: auto;
+    box-shadow:
+        0 1.25rem 3rem rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.carte-projet[data-carousel-pos="prev"] {
+    transform: translateX(-320px) scale(0.76) rotateY(22deg);
+    opacity: 0.42;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.carte-projet[data-carousel-pos="next"] {
+    transform: translateX(320px) scale(0.76) rotateY(-22deg);
+    opacity: 0.42;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.carte-projet[data-carousel-pos="prev"]:hover {
+    opacity: 0.65;
+    transform: translateX(-310px) scale(0.78) rotateY(18deg);
+}
+
+.carte-projet[data-carousel-pos="next"]:hover {
+    opacity: 0.65;
+    transform: translateX(310px) scale(0.78) rotateY(-18deg);
+}
+
+/* Contenu des cartes */
+.carte-projet h3 {
+    color: #fff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    flex-shrink: 0;
+}
+
+.carte-projet p {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin: 0 0 0.5rem;
+    flex-shrink: 0;
+}
+
+/* En mode normal (non agrandi) : texte centré verticalement */
+.carte-projet:not(.expanded) {
+    justify-content: center;
+    padding: 1.5rem 1.5rem;
+}
+
+.carte-projet:not(.expanded) h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.carte-projet:not(.expanded) p {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* Images et jeu remplissent l'espace restant */
+.carte-projet > div,
+.carte-projet #snake-game {
+    flex: 1 1 0;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;             /* Espace entre les éléments */
+    justify-content: center;
 }
-  
+
+/* Masquer images et snake tant que la carte n'est pas agrandie */
+.carte-projet:not(.expanded) .image-projet,
+.carte-projet:not(.expanded) #snake-game {
+    display: none;
+}
+
+/* --- Points de navigation --- */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+}
+
+.carousel-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-dot.active {
+    background: rgba(255, 255, 255, 0.85);
+    transform: scale(1.35);
+}
+
+.carousel-dot:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Zone du bouton Fermer sous le carousel */
+.conteneur-bouton-fermer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 4rem 0 2rem;
+    margin-top: auto;
+}
+
+
+/* =============================================================================
+   IMAGES DANS LES CARTES
+   ============================================================================= */
+.image-projet {
+    margin: 0.25rem auto 0;
+    width: 260px;
+    height: 264px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.image-projet img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-projet::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.image-projet.image-projet-clair::before { display: none; }
+
+
+/* =============================================================================
+   ZOOM MODAL
+   Au clic sur la carte active, elle est déplacée dans <body> via JS pour
+   échapper au contexte 3D du carousel. position: fixed fonctionne alors
+   correctement pour la centrer sur tout l'écran.
+   ============================================================================= */
+
+/* Bouton ⤢ injecté par JS dans chaque carte */
+.btn-zoom-carte {
+    /* Surcharge les styles de [class*="btn-"] */
+    position: absolute;
+    top: 0.55rem;
+    right: 0.6rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    cursor: zoom-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.carte-projet[data-carousel-pos="active"] .btn-zoom-carte {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.btn-zoom-carte:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    transform: scale(1.15);
+}
+
+/* Fond sombre derrière la carte agrandie */
+.carte-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(0, 0, 0, 0.80);
+    opacity: 0;
+    cursor: zoom-out;
+    transition: opacity 0.3s ease;
+}
+
+.carte-backdrop.open    { display: block; }
+.carte-backdrop.visible { opacity: 1; }
+
+/* Carte en mode agrandi */
+.carte-projet.expanded {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: min(92vw, 500px) !important;
+    height: auto !important;
+    max-height: 84vh;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 1.75rem !important;
+    border-radius: 1.25rem !important;
+    background: rgba(18, 18, 22, 0.98) !important;
+    box-shadow:
+        0 2rem 5rem rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(255, 255, 255, 0.14) !important;
+    z-index: 9999 !important;
+    cursor: zoom-out !important;
+    transition: none !important;
+    animation: cardExpand 0.32s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+}
+
+.carte-projet.expanded .btn-zoom-carte { display: none !important; }
+
+@keyframes cardExpand {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.84); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.carte-projet.expanded > div,
+.carte-projet.expanded #snake-game {
+    flex: none !important;
+    justify-content: flex-start !important;
+}
+
+.carte-projet.expanded h3 { font-size: 1.35rem !important; margin-bottom: 0.75rem !important; }
+.carte-projet.expanded p  { font-size: 0.92rem !important; margin-bottom: 0.75rem !important; }
+
+
+/* =============================================================================
+   JEU SNAKE
+   ============================================================================= */
+#snake-game {
+    margin-top: 0.5rem;
+    padding: 0;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
 #jeu {
     display: grid;
     grid-template-columns: repeat(20, 13px);
     grid-template-rows: repeat(20, 13px);
     gap: 0;
-    background-color: #000;    /* LE FOND NOIR EST ICI */
-    border: 2px solid #27ae60; /* LE BORD VERT */
+    background-color: #000;
+    border: 2px solid #27ae60;
     border-radius: 0.5rem;
     overflow: hidden;
 }
 
-.case { width: 13px; height: 13px; background: transparent; }
-.serpent { background: #f39c12; border-radius: 2px; }
+.case        { width: 13px; height: 13px; background: transparent; }
+.serpent     { background: #f39c12; border-radius: 2px; }
 .teteSerpent { background: rgb(245, 245, 2); border-radius: 2px; }
-.nourriture { background: #7affc6; border-radius: 50%; }
-  
+.nourriture  { background: #7affc6; border-radius: 50%; }
+
 #lancerJeu {
-	
-    background-color: #27ae60; color: #fff;
-    padding: 0.6rem 1.5rem; font-size: 0.875rem;
-    cursor: pointer; text-transform: uppercase;
-    border-radius: 999px; font-weight: bold; border: none;
-    transition: transform 0.2s;
+    padding: 0.6rem 1.5rem;
+    background-color: #27ae60;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
 }
-#lancerJeu:hover { transform: scale(1.05); background-color: #2ecc71; }
-  
+
+#lancerJeu:hover {
+    transform: scale(1.05);
+    background-color: #2ecc71;
+}
+
 #score {
-    color: #27ae60; /* Texte vert sur fond gris */
+    color: #27ae60;
     font-family: 'Courier New', monospace;
-    font-size: 1.1rem; font-weight: bold;
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
-/* --- Autres images --- */
-.image-projet {
-    margin: 0.25rem auto 0; width: 260px; height: 264px;
-    border-radius: 0.75rem; overflow: hidden;
-    background: rgba(0, 0, 0, 0.3); position: relative;
+@keyframes scoreAnimation {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.2); }
 }
-.carte-projet:nth-child(3) .image-projet { margin-top: 0.75rem; }
-.image-projet img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.image-projet::before { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1; }
-.image-projet.image-projet-clair::before { display: none; }
 
-/* Contrôles mobiles */
+/* Contrôles tactiles (cachés par défaut, affichés sur mobile) */
 .snake-controls {
-    margin-top: 0.5rem; display: none; flex-direction: column; align-items: center; gap: 0.4rem;
+    margin-top: 0.5rem;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
 }
+
 .snake-controls-row { display: flex; gap: 0.6rem; }
+
 .snake-control {
-    width: 2.8rem; height: 2.8rem; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255, 255, 255, 0.08); color: var(--texte-mute);
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--texte-mute);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@media (max-width: 700px) {
-    .projets-grille { flex-wrap: wrap; overflow-x: visible; }
-    .carte-projet { width: 100%; max-width: none; }
-    #jeu { grid-template-columns: repeat(20, 10px); grid-template-rows: repeat(20, 10px); }
+
+/* =============================================================================
+   RESPONSIVE — TABLETTE (max 1024px)
+   ============================================================================= */
+@media (max-width: 64rem) {
+    :root { --padding-section: 11vh 6vw; }
+    .nav-droite { right: 1.25rem; }
+}
+
+
+/* =============================================================================
+   RESPONSIVE — MOBILE (max 720px)
+   ============================================================================= */
+@media (max-width: 45rem) {
+
+    :root { --padding-section: 10vh 5vw; }
+
+    /* Cache le titre filigrane (trop grand) */
+    .titre-filigrane { display: none; }
+
+    /* Navigation réduite à de petits cercles */
+    .nav-droite {
+        right: 0.5rem;
+        gap: 0.25rem;
+    }
+
+    .nav-droite .lien-nav {
+        padding: 0;
+        margin: 0.2rem;
+        width: 2rem;
+        height: 2rem;
+        min-width: 0;
+        border-radius: 50%;
+        font-size: 0;
+        transition: background 0.18s ease;
+    }
+
+    /* Toujours afficher l'icône sur mobile */
+    .nav-droite .lien-nav::before {
+        content: attr(data-icon);
+        font-size: 0.9rem;
+        display: block;
+    }
+
+    /* Supprimer le glissement horizontal sur mobile */
+    .nav-droite .lien-nav:hover,
+    .nav-droite .lien-nav:focus {
+        transform: none;
+    }
+
+    /* Marges section Accueil réduites */
+    .contenu-section1 {
+        margin-top: -4rem;
+        margin-bottom: clamp(6rem, 20vh, 12rem);
+    }
+
+    .contenu-section2 {
+        margin-bottom: clamp(5rem, 18vh, 10rem);
+    }
+
+    /* Boutons flottants : centrés et compacts */
+    .btn-projets     { left: 50%; bottom: 15vh; padding: 0.75rem 1.25rem; font-size: 0.875rem; }
+    .btn-apropos     { left: 50%; bottom: 25vh; padding: 0.75rem 1.25rem; font-size: 0.875rem; }
+    .btn-telecharger { left: 50%; bottom: 15vh; padding: 0.75rem 1.25rem; font-size: 0.875rem; }
+    .btn-fermer      {            bottom:  6vh; padding: 0.75rem 1.25rem; font-size: 0.875rem; }
+
+    /* Sections détail moins hautes */
+    .detail-section { min-height: 70vh; }
+
+    /* Forcer la visibilité des animations reveal dans les sections détail */
+    .detail-section:not(.hidden) .reveal,
+    .detail-section:not(.hidden) .reveal p,
+    .detail-section:not(.hidden) .reveal h2 {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+    }
+
+    /* Carousel adapté mobile */
+    .carousel-track { perspective: 700px; }
+
+    .carte-projet { width: 240px; }
+
+    .carte-projet[data-carousel-pos="prev"] {
+        transform: translateX(-200px) scale(0.72) rotateY(22deg);
+        opacity: 0.35;
+    }
+
+    .carte-projet[data-carousel-pos="next"] {
+        transform: translateX(200px) scale(0.72) rotateY(-22deg);
+        opacity: 0.35;
+    }
+
+    .carte-projet[data-carousel-pos="prev"]:hover {
+        transform: translateX(-190px) scale(0.74) rotateY(18deg);
+        opacity: 0.55;
+    }
+
+    .carte-projet[data-carousel-pos="next"]:hover {
+        transform: translateX(190px) scale(0.74) rotateY(-18deg);
+        opacity: 0.55;
+    }
+
+    /* Snake réduit + contrôles tactiles */
+    #jeu {
+        grid-template-columns: repeat(20, 10px);
+        grid-template-rows: repeat(20, 10px);
+    }
+
     .case { width: 10px; height: 10px; }
-    .image-projet { width: 200px; height: 200px; }
+
     .snake-controls { display: flex; }
-    .detail-section { min-height: 70vh; height: auto !important; }
-    .detail-section:not(.hidden) .reveal, .detail-section:not(.hidden) .reveal p, 
-    .detail-section:not(.hidden) .reveal h2 { opacity: 1 !important; transform: none !important; visibility: visible !important; }
+
+    /* Images de carte réduites */
+    .image-projet { width: 200px; height: 200px; }
+
+    /* Padding du bouton Fermer réduit */
+    .conteneur-bouton-fermer { padding: 2rem 0 1.5rem; }
 }
 
-@keyframes scoreAnimation { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+/* =============================================================================
+   RESPONSIVE — TRÈS PETITS ÉCRANS (max 360px)
+   ============================================================================= */
+@media (max-width: 22.5rem) {
+
+    .carte-projet { width: 200px; }
+
+    .carte-projet[data-carousel-pos="prev"] {
+        transform: translateX(-160px) scale(0.7) rotateY(22deg);
+    }
+
+    .carte-projet[data-carousel-pos="next"] {
+        transform: translateX(160px) scale(0.7) rotateY(-22deg);
+    }
+}
+
+footer {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
