@@ -13,10 +13,6 @@
     --max-largeur-texte  : clamp(20rem, 90%, 47.5rem);
 }
 
-
-/* =============================================================================
-   RESET & BASE
-   ============================================================================= */
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -37,10 +33,7 @@ body {
 }
 
 
-/* =============================================================================
-   ARRIÈRE-PLAN & OVERLAY
-   Calques fixes derrière tout le contenu.
-   ============================================================================= */
+
 .arriere-plan {
     position: fixed;
     inset: 0;
@@ -70,7 +63,7 @@ body {
     background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.18));
 }
 
-/* Titre décoratif en filigrane */
+
 .titre-filigrane {
     position: fixed;
     left: 6vw;
@@ -85,9 +78,7 @@ body {
 }
 
 
-/* =============================================================================
-   NAVIGATION VERTICALE (droite)
-   ============================================================================= */
+
 .nav-droite {
     position: fixed;
     right: 1.5rem;
@@ -137,7 +128,7 @@ body {
     color: #fff;
 }
 
-/* --- Mode compact : icônes uniquement (toutes sections sauf Accueil) --- */
+
 .nav-droite.compact .lien-nav {
     padding: 0.75rem;
     font-size: 0;
@@ -148,18 +139,16 @@ body {
     font-size: 1.25rem;
 }
 
-/* En mode compact, les inactifs gardent leur rond mais sans emoji */
 .nav-droite.compact .lien-nav:not(.active)::before {
     content: '';
 }
 
-/* Au survol d'un lien inactif, l'emoji réapparaît */
 .nav-droite.compact .lien-nav:not(.active):hover::before,
 .nav-droite.compact .lien-nav:not(.active):focus::before {
     content: attr(data-icon);
 }
 
-/* En mode compact, hover = simple éclaircissement (pas de déplacement) */
+
 .nav-droite.compact .lien-nav:hover,
 .nav-droite.compact .lien-nav:focus {
     transform: none;
@@ -168,9 +157,6 @@ body {
 }
 
 
-/* =============================================================================
-   LAYOUT — SECTIONS
-   ============================================================================= */
 .contenu {
     position: relative;
     z-index: 20;
@@ -238,16 +224,14 @@ body {
 .souligne   { text-decoration: underline; }
 
 
-/* =============================================================================
-   FONDS DES SECTIONS
-   ============================================================================= */
+
 #accueil {
     background-image: none;
     position: relative;
     overflow: hidden;
 }
 
-/* Image de fond Accueil, retournée horizontalement */
+
 #accueil::before {
     content: "";
     position: absolute;
@@ -262,7 +246,7 @@ body {
     z-index: 0;
 }
 
-/* Fond partagé des sections À propos & Projets */
+
 .groupe-apropos-projets {
     position: relative;
     overflow: hidden;
@@ -274,7 +258,7 @@ body {
 
 #contact { background-image: url('images/bgclav.jpg'); }
 
-/* --- Section Contact --- */
+
 #contact .contenu-section h2 { text-align: center; }
 
 #contact .contenu-section p {
@@ -321,11 +305,6 @@ body {
 }
 
 
-/* =============================================================================
-   BOUTONS FLOTTANTS
-   Tous les éléments dont la classe commence par "btn-" partagent ce style de base.
-   Note : .btn-zoom-carte (injecté par JS) surcharge ces styles juste en-dessous.
-   ============================================================================= */
 [class*="btn-"] {
     position: absolute;
     display: inline-flex;
@@ -378,9 +357,7 @@ body {
 }
 
 
-/* =============================================================================
-   SECTIONS DÉTAIL
-   ============================================================================= */
+
 .detail-section {
     background: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(0,0,0,0.98));
     min-height: 70vh;
@@ -412,7 +389,7 @@ body {
     animation: slideOut 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* Layout propre de la section détail-projets */
+
 #detail-projets {
     display: flex;
     flex-direction: column;
@@ -432,11 +409,9 @@ body {
 }
 
 
-/* =============================================================================
-   CAROUSEL DE PROJETS
-   ============================================================================= */
 
-/* Lien vers la page de tous les projets */
+
+
 .lien-tous-projets {
     display: inline-block;
     margin-top: 0.5rem;
@@ -457,7 +432,6 @@ body {
     transform: translateY(-0.15rem);
 }
 
-/* En-tête (titre + lien) */
 .header-projets {
     display: flex;
     flex-direction: column;
@@ -468,7 +442,7 @@ body {
     max-width: var(--max-largeur-texte);
 }
 
-/* Zone centrée autour du carousel */
+
 .conteneur-carousel {
     display: flex;
     justify-content: center;
@@ -484,7 +458,6 @@ body {
     margin-top: 1rem;
 }
 
-/* Piste 3D */
 .carousel-track {
     position: relative;
     display: flex;
@@ -495,7 +468,7 @@ body {
     width: 100%;
 }
 
-/* --- Cartes --- */
+
 .carte-projet {
     position: absolute;
     width: 280px;
@@ -553,7 +526,7 @@ body {
     transform: translateX(310px) scale(0.78) rotateY(-18deg);
 }
 
-/* Contenu des cartes */
+
 .carte-projet h3 {
     color: #fff;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
@@ -571,7 +544,7 @@ body {
     flex-shrink: 0;
 }
 
-/* En mode normal (non agrandi) : texte centré verticalement */
+
 .carte-projet:not(.expanded) {
     justify-content: center;
     padding: 1.5rem 1.5rem;
@@ -590,7 +563,7 @@ body {
     margin: 0;
 }
 
-/* Images et jeu remplissent l'espace restant */
+
 .carte-projet > div,
 .carte-projet #snake-game {
     flex: 1 1 0;
@@ -601,13 +574,13 @@ body {
     justify-content: center;
 }
 
-/* Masquer images et snake tant que la carte n'est pas agrandie */
+
 .carte-projet:not(.expanded) .image-projet,
 .carte-projet:not(.expanded) #snake-game {
     display: none;
 }
 
-/* --- Points de navigation --- */
+
 .carousel-dots {
     display: flex;
     justify-content: center;
@@ -635,7 +608,7 @@ body {
     background: rgba(255, 255, 255, 0.5);
 }
 
-/* Zone du bouton Fermer sous le carousel */
+
 .conteneur-bouton-fermer {
     display: flex;
     justify-content: center;
@@ -646,9 +619,7 @@ body {
 }
 
 
-/* =============================================================================
-   IMAGES DANS LES CARTES
-   ============================================================================= */
+
 .image-projet {
     margin: 0.25rem auto 0;
     width: 260px;
@@ -677,16 +648,9 @@ body {
 .image-projet.image-projet-clair::before { display: none; }
 
 
-/* =============================================================================
-   ZOOM MODAL
-   Au clic sur la carte active, elle est déplacée dans <body> via JS pour
-   échapper au contexte 3D du carousel. position: fixed fonctionne alors
-   correctement pour la centrer sur tout l'écran.
-   ============================================================================= */
 
-/* Bouton ⤢ injecté par JS dans chaque carte */
 .btn-zoom-carte {
-    /* Surcharge les styles de [class*="btn-"] */
+    
     position: absolute;
     top: 0.55rem;
     right: 0.6rem;
@@ -719,7 +683,7 @@ body {
     transform: scale(1.15);
 }
 
-/* Fond sombre derrière la carte agrandie */
+
 .carte-backdrop {
     display: none;
     position: fixed;
@@ -734,7 +698,7 @@ body {
 .carte-backdrop.open    { display: block; }
 .carte-backdrop.visible { opacity: 1; }
 
-/* Carte en mode agrandi */
+
 .carte-projet.expanded {
     position: fixed !important;
     top: 50% !important;
@@ -775,9 +739,7 @@ body {
 .carte-projet.expanded p  { font-size: 0.92rem !important; margin-bottom: 0.75rem !important; }
 
 
-/* =============================================================================
-   JEU SNAKE
-   ============================================================================= */
+
 #snake-game {
     margin-top: 0.5rem;
     padding: 0;
@@ -834,7 +796,7 @@ body {
     50%       { transform: scale(1.2); }
 }
 
-/* Contrôles tactiles (cachés par défaut, affichés sur mobile) */
+/* Contrôles tactiles (caché par défaut mais je les garde sur mobile) */
 .snake-controls {
     margin-top: 0.5rem;
     display: none;
@@ -859,18 +821,16 @@ body {
 }
 
 
-/* =============================================================================
-   RESPONSIVE — TABLETTE (max 1024px)
-   ============================================================================= */
+
+
+
 @media (max-width: 64rem) {
     :root { --padding-section: 11vh 6vw; }
     .nav-droite { right: 1.25rem; }
 }
 
 
-/* =============================================================================
-   RESPONSIVE — MOBILE (max 720px)
-   ============================================================================= */
+
 @media (max-width: 45rem) {
 
     :root { --padding-section: 10vh 5vw; }
@@ -895,14 +855,14 @@ body {
         transition: background 0.18s ease;
     }
 
-    /* Toujours afficher l'icône sur mobile */
+    
     .nav-droite .lien-nav::before {
         content: attr(data-icon);
         font-size: 0.9rem;
         display: block;
     }
 
-    /* Supprimer le glissement horizontal sur mobile */
+    
     .nav-droite .lien-nav:hover,
     .nav-droite .lien-nav:focus {
         transform: none;
@@ -961,7 +921,7 @@ body {
         opacity: 0.55;
     }
 
-    /* Snake réduit + contrôles tactiles */
+    
     #jeu {
         grid-template-columns: repeat(20, 10px);
         grid-template-rows: repeat(20, 10px);
@@ -971,17 +931,15 @@ body {
 
     .snake-controls { display: flex; }
 
-    /* Images de carte réduites */
+    
     .image-projet { width: 200px; height: 200px; }
 
-    /* Padding du bouton Fermer réduit */
+    
     .conteneur-bouton-fermer { padding: 2rem 0 1.5rem; }
 }
 
 
-/* =============================================================================
-   RESPONSIVE — TRÈS PETITS ÉCRANS (max 360px)
-   ============================================================================= */
+
 @media (max-width: 22.5rem) {
 
     .carte-projet { width: 200px; }

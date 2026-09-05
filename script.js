@@ -244,11 +244,6 @@ function initCarousel() {
     updatePositions();
 
 
-    // -------------------------------------------------------------------------
-    // ZOOM MODAL
-    // Au clic sur la carte active, elle est déplacée dans <body> pour
-    // échapper au contexte 3D du carousel (sinon position: fixed ne marche pas).
-    // -------------------------------------------------------------------------
 
     // Créer le fond sombre une seule fois
     let backdrop = document.querySelector('.carte-backdrop');
@@ -258,9 +253,9 @@ function initCarousel() {
         document.body.appendChild(backdrop);
     }
 
-    let carteAgrandie = null;  // carte actuellement ouverte en modal
-    let ancreDOM      = null;  // commentaire HTML pour retrouver la position d'origine
-    let positionSauvee = null; // data-carousel-pos sauvegardé
+    let carteAgrandie = null;  
+    let ancreDOM      = null;  
+    let positionSauvee = null; 
 
     function agrandirCarte(card) {
         if (carteAgrandie) return;
@@ -275,7 +270,7 @@ function initCarousel() {
         carteAgrandie = card;
         card.classList.add('expanded');
 
-        // Afficher le fond sombre
+        
         backdrop.classList.add('open');
         requestAnimationFrame(() => requestAnimationFrame(() => backdrop.classList.add('visible')));
 
@@ -286,7 +281,7 @@ function initCarousel() {
         if (!carteAgrandie) return;
         const card = carteAgrandie;
 
-        // Retirer la classe expanded
+        
         card.classList.remove('expanded');
 
         // Remettre la carte à sa place d'origine dans le carousel
@@ -298,7 +293,7 @@ function initCarousel() {
         card.dataset.carouselPos = positionSauvee;
         positionSauvee = null;
 
-        // Fermer le fond sombre
+        
         backdrop.classList.remove('visible');
         backdrop.addEventListener('transitionend', function nettoyage() {
             backdrop.classList.remove('open');
@@ -313,8 +308,7 @@ function initCarousel() {
         if (e.key === 'Escape') fermerCarte();
     }
 
-    // Clic sur la carte active → agrandir
-    // Clic sur la carte agrandie → fermer (sauf sur les éléments interactifs)
+    
     cards.forEach(card => {
         card.addEventListener('click', e => {
             if (carteAgrandie === card) {
