@@ -18,7 +18,9 @@ if (jeu && boutonLancer && scoreElement) {
   let jeuLance = false;
   let intervalId = null;
 
-  // création de la grille
+
+  
+  // grille
   for (let i = 0; i < taille * taille; i++) {
     const cell = document.createElement("div");
     cell.classList.add("case");
@@ -106,6 +108,8 @@ if (jeu && boutonLancer && scoreElement) {
     mettreAJourScore();
     afficher();
 
+
+    
     if (stopTimer && intervalId !== null) {
       clearInterval(intervalId);
       intervalId = null;
@@ -119,6 +123,9 @@ if (jeu && boutonLancer && scoreElement) {
       y: serpent[0].y + direction.y
     };
 
+
+
+    
     const collisionMur =
       tete.x < 0 || tete.x >= taille || tete.y < 0 || tete.y >= taille;
     const collisionCorps = serpent.some(
@@ -157,6 +164,8 @@ if (jeu && boutonLancer && scoreElement) {
     afficher();
   }
 
+
+  
   boutonLancer.addEventListener("click", () => {
     if (!jeuLance) {
       compteurTentatives++;
@@ -167,7 +176,6 @@ if (jeu && boutonLancer && scoreElement) {
       intervalId = setInterval(deplacer, 300);
     }
   });
-
   window.addEventListener("pagehide", () => {
     resetJeu(true);
   });
