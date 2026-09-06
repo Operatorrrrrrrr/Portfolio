@@ -319,7 +319,7 @@ body {
 
 #matrix-bg.active {
     opacity: 1 !important;
-    mix-blend-mode: screen;  /* FAIT POP LE VERT */
+    mix-blend-mode: screen;  
 }
 
 footer {
